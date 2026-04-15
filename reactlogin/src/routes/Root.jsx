@@ -7,7 +7,7 @@ export default function Root() {
     return (
         <>
             <MainNavigation/>
-            <main >
+            <main className=" place-content-start mb-100 p-10 bg-cyan-100">
                 <Outlet />
             </main>
         </>
