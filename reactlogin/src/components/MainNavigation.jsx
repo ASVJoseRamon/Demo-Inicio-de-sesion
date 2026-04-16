@@ -1,65 +1,62 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 
 export default function MainNavigation() {
     return (
-        <header className="bg-cyan-950 ">
-            <div className="flex justify-center p-5 ">
-                <img src="/Facturas.png" alt="Logo aplicacion" 
-                className=" row-auto h-17"/>
-                <h1 className="text-amber-300 font-bold font-sans p-5">
+        <header className="bg-cyan-100 ">
+            <div className="flex justify-center pt-5 h-25 hover:text-lg ">
+                <Link to="/"><img src="/Facturas.png" alt="Logo aplicacion" 
+                className=" row-auto h-15 hover:shadow-xl/30"/></Link>
+                <h1 className="text-amber-300 font-bold font-mono p-5 text-2xl">
                     Aplicacion de Facturas
                 </h1>
             </div>
-            
-            
-            <nav >
-                <ul className="mx-auto flex justify-center  gap-x-4 p-2  text-gray-50" >
-                    <li>
+            <nav className="bg-cyan-950 h-12 ">
+                <ul className=" flex justify-center  gap-x-4 p-2  text-amber-300" >
+                    <li className="basis-35 text-center">
                         <NavLink
-                        className=" text-center p-2 rounded-xl
-                    hover:bg-emerald-600 hover:underline hover:text-emerald-900"
+                        className=" text-gray-50
+                        hover:underline hover:text-lg hover:shadow-xl/30 "
                         to='/'
                         end
                         >
                             Página Principal
                         </NavLink>
                     </li>
-                    <li 
-                    >
+                    |<li className="basis-30 text-center">
                         <NavLink
-                        className=" text-center p-2 rounded-xl
-                        hover:bg-emerald-600 hover:underline hover:text-emerald-900"
+                        className="text-gray-50
+                        hover:underline hover:text-lg hover:shadow-xl/30"
                         to='/panel'
                         end
                         >
                             Panel
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> 
+                    |<li className="basis-30 text-center">
                         <NavLink
-                        className="  text-center p-2 rounded-xl
-                    hover:bg-emerald-600 hover:underline hover:text-emerald-900"
+                        className="text-gray-50
+                        hover:underline hover:text-lg hover:shadow-xl/30"
                         to='/inventario'
                         end
                         >
                             Inventario
                         </NavLink>
                     </li>
-                    <li>
+                    |<li className="basis-30 text-center">
                         <NavLink
-                        className=" text-center p-2 rounded-xl
-                    hover:bg-emerald-600 hover:underline hover:text-emerald-900"
+                        className="text-gray-50
+                        hover:underline hover:text-lg hover:shadow-xl/30"
                         to='/login'
                         end
                         >
                             Iniciar Sesión
                         </NavLink>
                     </li>
-                    <li>
+                    |<li className="basis-30 text-center">
                         <NavLink
-                        className=" text-center p-2 rounded-xl
-                    hover:bg-emerald-600 hover:underline hover:text-emerald-900"
+                        className="text-gray-50
+                        hover:underline hover:text-lg hover:shadow-xl/30"
                         to='/logout'
                         end
                         >
