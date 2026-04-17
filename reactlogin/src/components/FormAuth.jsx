@@ -25,27 +25,27 @@ export default function AuthForm() {
     form.handleSubmit()
     }}
 >
-        <FieldSet className="w-full max-w-xs">
-          <FieldGroup>
-              <h1>Iniciar sesión</h1>
-              <h1>Registrar Usuario</h1>
-              <Field>
-                <FieldLabel htmlFor="username">Username</FieldLabel>
-                <Input id="username" type="text" placeholder="Correo" className="bg-gray-50"/>
-                <FieldDescription>
-                    Choose a unique username for your account.
-                </FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <FieldDescription>
-                    Must be at least 8 characters long.
-                </FieldDescription>
-                <Input id="password" type="password" placeholder="••••••••" className="bg-gray-50"/>
-              </Field>
-              <ShBoton type="onSubmit">Ingresar</ShBoton>
-          </FieldGroup>
-        </FieldSet>
+    <FieldSet className="w-full max-w-xs">
+      <FieldGroup>
+        <h1>Iniciar sesión</h1>
+        <h1>Registrar Usuario</h1>
+        <Field>
+          <FieldLabel htmlFor="username">Username</FieldLabel>
+          <Input id="username" type="text" placeholder="Correo" className="bg-gray-50"/>
+          <FieldDescription>
+            Choose a unique username for your account.
+          </FieldDescription>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <FieldDescription>
+            Must be at least 8 characters long.
+          </FieldDescription>
+          <Input id="password" type="password" placeholder="••••••••" className="bg-gray-50"/>
+        </Field>
+        <ShBoton type="onSubmit">Ingresar</ShBoton>
+      </FieldGroup>
+    </FieldSet>
   </form>
         
     </div>

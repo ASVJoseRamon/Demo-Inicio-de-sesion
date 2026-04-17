@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import useAuthStore from './authStore'; // Tu store de Zustand
+import useAuthStore from '../src/store/useAuthStore'; // Tu store de Zustand
 
 // Función que hace la llamada a la API
 const loginUser = async (credentials) => {

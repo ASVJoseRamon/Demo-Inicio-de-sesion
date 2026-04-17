@@ -1,14 +1,14 @@
 "use client"
 
 import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { zodResolver } from "hookform/resolvers/zod"
 import * as z from "zod"
-import { useLogin } from "./hooks/useLogin" // El hook que creamos arriba
+import { useLogin } from "./EjemploFormShad" // El hook que creamos arriba
 
 // Componentes de Shadcn
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Button } from "/components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "/components/ui/form"
+import { Input } from "/components/ui/input"
 
 const formSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
