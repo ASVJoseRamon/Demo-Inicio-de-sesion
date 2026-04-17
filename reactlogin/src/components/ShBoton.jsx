@@ -1,6 +1,6 @@
 import { Button } from "/components/ui/button"
-export default function ShBoton({children, onClick}) {
+export default function ShBoton({children, ...props}) {
     return (
-        <Button variant="outline" onClick={onClick}>{children}</Button>
+        <Button variant="outline" {...props}>{children}</Button>
     );
 }

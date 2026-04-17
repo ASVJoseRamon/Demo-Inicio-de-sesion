@@ -10,7 +10,7 @@ const ErrorPage = () => {
       <h1>¡Ups! Algo salió mal</h1>
       <p>Lo sentimos, ha ocurrido un error inesperado.</p>
       <br/>
-      <div className="bg-emerald-200 p-10 rounded-lg inline-block">
+      <div className="bg-emerald-200 p-10 rounded-lg inline-block hover:shadow-xl/50">
         {/* Mostramos información específica según el tipo de error */}
         {isRouteErrorResponse(error) ? (
           <p>

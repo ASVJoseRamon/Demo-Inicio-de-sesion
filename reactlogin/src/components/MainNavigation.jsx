@@ -11,11 +11,13 @@ export default function MainNavigation() {
                     Aplicacion de Facturas
                 </h1>
             </div>
-            <nav className="bg-cyan-950 h-12 ">
-                <ul className=" flex justify-center  gap-x-4 p-2  text-amber-300" >
-                    <li className="basis-35 text-center">
+
+            <div className="flex justify-center px-10">
+            <nav className="bg-cyan-950 border-cyan-950 h-14 rounded-t-lg w-200 border-4 hover:border-b-amber-300">
+                <ul className=" flex content-center-safe  gap-x-5 p-4 text-amber-300 " >
+                    <li className="basis-35 justify-center">
                         <NavLink
-                        className=" text-gray-50
+                        className=" text-gray-50 whitespace-nowrap
                         hover:underline hover:text-lg hover:shadow-xl/30 "
                         to='/'
                         end
@@ -45,7 +47,7 @@ export default function MainNavigation() {
                     </li>
                     |<li className="basis-30 text-center">
                         <NavLink
-                        className="text-gray-50
+                        className="text-gray-50 whitespace-nowrap
                         hover:underline hover:text-lg hover:shadow-xl/30"
                         to='/login'
                         end
@@ -55,7 +57,7 @@ export default function MainNavigation() {
                     </li>
                     |<li className="basis-30 text-center">
                         <NavLink
-                        className="text-gray-50
+                        className="text-gray-50 whitespace-nowrap
                         hover:underline hover:text-lg hover:shadow-xl/30"
                         to='/logout'
                         end
@@ -65,6 +67,7 @@ export default function MainNavigation() {
                     </li>
                 </ul>
             </nav>
+            </div>
         </header>
     );
 }
