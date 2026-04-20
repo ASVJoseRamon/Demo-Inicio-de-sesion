@@ -3,7 +3,7 @@ import './App.css'
 import Root from './routes/Root'
 import Home from './routes/Home'
 import ErrorPage from './routes/ErrorPage'
-import Auth from './routes/Auth'
+import Auth from './routes/AuthPage'
 import PanelPage from './routes/PanelPage'
 import Inventario from './routes/Inventario'
 function App() {
