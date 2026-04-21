@@ -10,7 +10,7 @@ export const AuthLoginSchema = z.object({
 })
 
 export const validateAuth = (data) => {
-  const result = loginSchema.safeParse(data);
+  const result = AuthLoginSchema.safeParse(data);
 
   if (!result.success) {
     return {

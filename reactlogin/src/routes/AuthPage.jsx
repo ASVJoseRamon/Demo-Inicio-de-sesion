@@ -1,3 +1,4 @@
+
 import FormAuth from "../components/FormAuth";
 
 export default function AuthPage() {
@@ -12,24 +13,21 @@ export async function action({request}) {
     const searchParams = new URL(request.url).searchParams;
     const mode = searchParams.get('mode') || 'iniciarSeccion'
 
-    if ( mode !== 'iniciarSeccion' && mode !== 'registrarse') {
+    if ( mode !== 'login' && mode !== 'signup') {
         new Response (JSON.stringify({ message: 'Modo no soportado' }), {
             status: 442
         });
     };
 
-    const data = await request.formData();
-    const authData = {
-        email: data.get('email'),
-        password: data.get('password'),
-    };
+    const email = useAuthStore((state) => state.email);
+    const password = useAuthStore((state) => state.password);
 
     const response = await fetch('http://localhost:8081/usuario' + mode, {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(authData)
+        body: JSON.stringify(email, password)
     });
 
     if (response.status === 442 || response.status === 401) {
@@ -41,7 +39,8 @@ export async function action({request}) {
             status: 500,
         })
     }
+    console.log(response);
 
     //MANEJO DEL TOKEN
-
+    
 }

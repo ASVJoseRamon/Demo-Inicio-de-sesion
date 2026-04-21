@@ -6,6 +6,10 @@ import ErrorPage from './routes/ErrorPage'
 import Auth from './routes/AuthPage'
 import PanelPage from './routes/PanelPage'
 import Inventario from './routes/Inventario'
+import Logout from './routes/Logout'
+
+import {action as authAction} from './routes/AuthPage'
+
 function App() {
 const router = createBrowserRouter(
   [
@@ -17,7 +21,7 @@ const router = createBrowserRouter(
       children:[
         { index: true, element: <Home/>  },
         { path: 'login', element: <Auth/>},
-        { path: 'logout'},
+        { path: 'logout', element: <Logout/>},
         { path: 'inventario', element: <Inventario/>},
         { path: 'panel', element: <PanelPage/>}
       ]
@@ -26,7 +30,7 @@ const router = createBrowserRouter(
 )
   return (
     <>
-      <RouterProvider router={router}/>
+        <RouterProvider router={router}/>
     </>
   )
 }

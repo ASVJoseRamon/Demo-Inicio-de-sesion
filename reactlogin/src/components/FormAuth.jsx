@@ -9,25 +9,31 @@ import { Input } from "/components/ui/input"
 import ShBoton from "./ShBoton"
 import useAuthStore from "../store/useAuthStore"
 import { useForm } from "@tanstack/react-form"
-import { AuthLoginSchema, validateAuth } from '../validations/AuthZod'
+import { AuthLoginSchema } from '../validations/AuthZod'
 
 
 export default function AuthForm() {
-
-  const { login } = useAuthStore();
+  const email = useAuthStore( (state) => state.email);
+  const login = useAuthStore( (state) => state.login);
+  const token = useAuthStore( (state) => state.token);
 
   const form = useForm({
-      defaultValues: { email: '', password: '' },
-      onSubmit: ({value}) => {
-        console.log('Datos enviados a la API:', value)
-      },
+    defaultValues: { email: '', password: '' },
+    onValidate: () => {},
+    onSubmit: ({ value }) => {
+      console.log(value);
+      console.log("Usuario: "+value.email);
+      console.log("Contraseña: "+value.password);
+      console.log("Token: "+value.token);
+      login(value.email, value.password);
+      console.log("Usuario Store: "+ email);
+    }
   })
 
   return (
     <div>
     <form onSubmit={(e) => {
         e.preventDefault()
-        e.stopPropagation()
         form.handleSubmit()
       }}>
     <FieldSet className="w-full max-w-xs">
@@ -36,14 +42,6 @@ export default function AuthForm() {
         <h1>Registrar Usuario</h1>
         <form.Field
           name="email"
-          validators={{
-                  onSubmit: ({ value }) => {
-            // Accedemos solo a la regla del email dentro del esquema
-                  const result = AuthLoginSchema.shape.email.safeParse(value);
-            // Si no tiene éxito, devolvemos el mensaje de error de Zod
-                  return result.success ? undefined : result.error.errors[0].message;
-                  },
-                }}
           children = {(field) => (
             <div>
               <FieldLabel htmlFor={field.name}>Correo</FieldLabel>
@@ -57,17 +55,18 @@ export default function AuthForm() {
                 onBlur={field.handleBlur}
                 className="bg-gray-50"
               />
-              <FieldDescription>
-                Ingresa tu correo electronico
-              </FieldDescription>
-              
+              { field.state.meta.errors.length > 0 ?
+              <FieldDescription className="text-sm text-red-500 font-medium">
+                {field.state.meta.errors.join(', ')}</FieldDescription> :
+              <FieldDescription>Ingresa tu correo electronico</FieldDescription>
+              }
             </div>
           )}
         />
         <form.Field
           name="password"
           validators={{
-              onSubmit: ({ value }) => {
+              onChange: ({ value }) => {
             // Accedemos solo a la regla del email dentro del esquema
               const result = AuthLoginSchema.shape.password.safeParse(value);
             // Si no tiene éxito, devolvemos el mensaje de error de Zod
@@ -97,6 +96,7 @@ export default function AuthForm() {
       </FieldGroup>
     </FieldSet>   
     </form>
+    
     </div>
   )
 }

@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+
 const useAuthStore = create( 
   persist ((set) => ({
-  user: null,
+  email: null,
   password: null,
   token: null,
   isLoading: false,
@@ -10,10 +11,10 @@ const useAuthStore = create(
   isAuthenticated: false,
 
 
-  login: async (email,password) => {
+  login: async ( email, password ) => {
     set( {isLoading: true, error: null} );
     try{
-      const response = await fetch( 'http:localhost:8080/user/login', {
+      const response = await fetch( 'http://localhost:8081/user/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
@@ -21,18 +22,21 @@ const useAuthStore = create(
       if (!response.ok) throw new Error('Credenciales invalidas');
 
       const data = await response.json();
-
-      set( {user: data.user, token: data.token, isAuthenticated: true, isLoading: false} );
+      console.log(data);
+      set( {token: data.token, isAuthenticated: true, isLoading: false} );
     }catch(err) {
-      set( {error:message, isLoading: false });
+      set( {error: err.message, isLoading: false });
+      console.log(err.message);
     }
+   
   }, 
-  logout: () => set({user:null, isAuthenticated: false}),
+  logout: () => set({email: null, isAuthenticated: false}),
 
-})
-),{
-  name: 'auth-storage'
+}),{
+  name: 'token',
+  partialize: (state) => ({token: state.token})
 }
+)
 );
   
 export default useAuthStore;
