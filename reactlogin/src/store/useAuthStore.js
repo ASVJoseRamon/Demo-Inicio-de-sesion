@@ -6,6 +6,7 @@ const useAuthStore = create(
   email: null,
   password: null,
   token: null,
+  tokenDuration: null,
   isLoading: false,
   error: null,
   isAuthenticated: false,
@@ -23,18 +24,25 @@ const useAuthStore = create(
 
       const data = await response.json();
       console.log(data);
-      set( {token: data.token, isAuthenticated: true, isLoading: false} );
+
+      const expiration = new Date();
+      expiration.setMinutes(expiration.getMinutes()+1)
+
+      const now = new Date()
+      const duration = expiration.getTime()-now.getTime();
+
+      set( {token: data.token, isAuthenticated: true, isLoading: false, tokenDuration: duration} );
+  
     }catch(err) {
       set( {error: err.message, isLoading: false });
       console.log(err.message);
     }
-   
-  }, 
-  logout: () => set({email: null, isAuthenticated: false}),
+    }, 
+  logout: () => set({token: null, isAuthenticated: false, tokenDuration: null}),
 
 }),{
   name: 'token',
-  partialize: (state) => ({token: state.token})
+  partialize: (state) => ({token: state.token, tokenDuration: state.tokenDuration})
 }
 )
 );

@@ -1,8 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useActionData, useSubmit } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
-import ShBoton from "../components/ShBoton"
+import { useEffect } from "react";
+import { getTokenDuration } from "../utils/authUtils";
 
 export default function Root() {
+    const token = useActionData();
+    const submit = useSubmit();
+
+
+
     return (
         <>
             <MainNavigation />

@@ -1,7 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
-
+import useAuthStore from "../store/useAuthStore";
 
 export default function MainNavigation() {
+    
+  const isAuthenticated = useAuthStore( (state) => state.isAuthenticated);
+
     return (
         <header className="bg-cyan-100 ">
             <div className="flex justify-center pt-5 h-25 hover:text-lg ">
@@ -13,7 +16,7 @@ export default function MainNavigation() {
             </div>
 
             <div className="flex justify-center px-10">
-            <nav className="bg-cyan-950 border-cyan-950 h-14 rounded-t-lg w-200 border-4 hover:border-b-amber-300">
+            <nav className="flex justify-center bg-cyan-950 border-cyan-950 h-14 rounded-t-lg w-full border-4 hover:border-b-amber-300">
                 <ul className=" flex content-center-safe  gap-x-5 p-4 text-amber-300 " >
                     <li className="basis-35 justify-center">
                         <NavLink
@@ -45,7 +48,7 @@ export default function MainNavigation() {
                             Inventario
                         </NavLink>
                     </li>
-                    |<li className="basis-30 text-center">
+                    {!isAuthenticated && ( <><p>|</p> <li className="basis-30 text-center">
                         <NavLink
                         className="text-gray-50 whitespace-nowrap
                         hover:underline hover:text-lg hover:shadow-xl/30"
@@ -54,8 +57,9 @@ export default function MainNavigation() {
                         >
                             Iniciar Sesión
                         </NavLink>
-                    </li>
-                    |<li className="basis-30 text-center">
+                    </li></>
+                    )}
+                    {isAuthenticated && ( <><p>|</p> <li className="basis-30 text-center">
                         <NavLink
                         className="text-gray-50 whitespace-nowrap
                         hover:underline hover:text-lg hover:shadow-xl/30"
@@ -64,7 +68,7 @@ export default function MainNavigation() {
                         >
                             Cerrar Sesión
                         </NavLink>
-                    </li>
+                    </li> </>)}
                 </ul>
             </nav>
             </div>

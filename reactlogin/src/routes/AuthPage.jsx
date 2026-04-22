@@ -1,4 +1,4 @@
-
+import useAuthStore from "../store/useAuthStore";
 import FormAuth from "../components/FormAuth";
 
 export default function AuthPage() {
@@ -9,20 +9,12 @@ export default function AuthPage() {
     );  
 }
 
-export async function action({request}) {
-    const searchParams = new URL(request.url).searchParams;
-    const mode = searchParams.get('mode') || 'iniciarSeccion'
-
-    if ( mode !== 'login' && mode !== 'signup') {
-        new Response (JSON.stringify({ message: 'Modo no soportado' }), {
-            status: 442
-        });
-    };
+export async function action() {
 
     const email = useAuthStore((state) => state.email);
     const password = useAuthStore((state) => state.password);
 
-    const response = await fetch('http://localhost:8081/usuario' + mode, {
+    const response = await fetch('http://localhost:8081/user/login', {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json'
@@ -39,8 +31,16 @@ export async function action({request}) {
             status: 500,
         })
     }
-    console.log(response);
+    console.log("Token recibido: "+response.token);
 
     //MANEJO DEL TOKEN
-    
+    const resData = await response.json()
+    const token = resData.token()
+
+    const expiration = new Date();
+    expiration.setMinutes(expiration.getMinutes()+1)
+
+
+
+
 }

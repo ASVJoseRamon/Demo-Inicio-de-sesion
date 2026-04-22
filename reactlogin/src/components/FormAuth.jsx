@@ -10,23 +10,22 @@ import ShBoton from "./ShBoton"
 import useAuthStore from "../store/useAuthStore"
 import { useForm } from "@tanstack/react-form"
 import { AuthLoginSchema } from '../validations/AuthZod'
+import { useNavigate } from "react-router"
 
 
 export default function AuthForm() {
-  const email = useAuthStore( (state) => state.email);
   const login = useAuthStore( (state) => state.login);
-  const token = useAuthStore( (state) => state.token);
 
   const form = useForm({
     defaultValues: { email: '', password: '' },
     onValidate: () => {},
-    onSubmit: ({ value }) => {
+    onSubmit: async ({ value }) => {
       console.log(value);
       console.log("Usuario: "+value.email);
       console.log("Contraseña: "+value.password);
-      console.log("Token: "+value.token);
       login(value.email, value.password);
-      console.log("Usuario Store: "+ email);
+      console.log("Token: "+value.token);
+      console.log("Duracion: "+value.tokenDuration);
     }
   })
 

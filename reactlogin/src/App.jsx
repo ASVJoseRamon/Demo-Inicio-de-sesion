@@ -10,6 +10,8 @@ import Logout from './routes/Logout'
 
 import {action as authAction} from './routes/AuthPage'
 
+import {loader as tokenLoader, checkAuthLoader} from './utils/authUtils'
+
 function App() {
 const router = createBrowserRouter(
   [
@@ -20,7 +22,9 @@ const router = createBrowserRouter(
       id: 'root',
       children:[
         { index: true, element: <Home/>  },
-        { path: 'login', element: <Auth/>},
+        { path: 'login', 
+          element: <Auth/>,
+        },
         { path: 'logout', element: <Logout/>},
         { path: 'inventario', element: <Inventario/>},
         { path: 'panel', element: <PanelPage/>}
