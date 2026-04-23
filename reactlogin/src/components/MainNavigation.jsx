@@ -3,7 +3,11 @@ import useAuthStore from "../store/useAuthStore";
 
 export default function MainNavigation() {
     
-  const isAuthenticated = useAuthStore( (state) => state.isAuthenticated);
+    const isAuthenticated = useAuthStore( (state) => state.isAuthenticated);
+    const token = useAuthStore( (state) => state.token);
+    const tokenDuration = useAuthStore( (state) => state.tokenDuration);
+    const isLoading = useAuthStore( (state) => state.isLoading);
+    const email = useAuthStore( (state) => state.email);
 
     return (
         <header className="bg-cyan-100 ">
@@ -71,7 +75,17 @@ export default function MainNavigation() {
                     </li> </>)}
                 </ul>
             </nav>
+            
             </div>
+            <p>isAuthenticated: {isAuthenticated}</p>
+            {isAuthenticated && (
+                <>
+                    <p>Email: {email}</p>
+                    <p>Token: {token}</p>
+                    <p>TokenDuration: {tokenDuration}</p>
+                    <p>Loading: {isLoading}</p>
+                </>
+            )}
         </header>
     );
 }

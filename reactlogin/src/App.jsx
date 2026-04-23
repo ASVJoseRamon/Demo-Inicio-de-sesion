@@ -1,16 +1,17 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './App.css'
-import Root from './routes/Root'
-import Home from './routes/Home'
-import ErrorPage from './routes/ErrorPage'
-import Auth from './routes/AuthPage'
-import PanelPage from './routes/PanelPage'
-import Inventario from './routes/Inventario'
-import Logout from './routes/Logout'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './App.css';
+import Root from './routes/Root';
+import Home from './routes/Home';
+import ErrorPage from './routes/ErrorPage';
+import Auth from './routes/AuthPage';
+import PanelPage from './routes/PanelPage';
+import Inventario from './routes/Inventario';
+import Logout from './routes/Logout';
 
-import {action as authAction} from './routes/AuthPage'
+import {action as authAction} from './routes/AuthPage';
 
-import {loader as tokenLoader, checkAuthLoader} from './utils/authUtils'
+import {loader as tokenLoader, checkAuthLoader} from './utils/authUtils';
+import {action as logoutAction} from './routes/Logout';
 
 function App() {
 const router = createBrowserRouter(
@@ -25,7 +26,7 @@ const router = createBrowserRouter(
         { path: 'login', 
           element: <Auth/>,
         },
-        { path: 'logout', element: <Logout/>},
+        { path: 'logout', action: logoutAction,},
         { path: 'inventario', element: <Inventario/>},
         { path: 'panel', element: <PanelPage/>}
       ]

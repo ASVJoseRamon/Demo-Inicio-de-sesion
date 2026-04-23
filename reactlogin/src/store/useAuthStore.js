@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 const useAuthStore = create( 
-  persist ((set) => ({
+  persist ((set, get) => ({
   email: null,
   password: null,
   token: null,
@@ -13,7 +13,7 @@ const useAuthStore = create(
 
 
   login: async ( email, password ) => {
-    set( {isLoading: true, error: null} );
+    set( { email: email, password: password, isLoading: true, error: null} );
     try{
       const response = await fetch( 'http://localhost:8081/user/login', {
         method: 'POST',
@@ -25,11 +25,7 @@ const useAuthStore = create(
       const data = await response.json();
       console.log(data);
 
-      const expiration = new Date();
-      expiration.setMinutes(expiration.getMinutes()+1)
-
-      const now = new Date()
-      const duration = expiration.getTime()-now.getTime();
+      const duration = 10000;
 
       set( {token: data.token, isAuthenticated: true, isLoading: false, tokenDuration: duration} );
   
@@ -37,8 +33,9 @@ const useAuthStore = create(
       set( {error: err.message, isLoading: false });
       console.log(err.message);
     }
-    }, 
-  logout: () => set({token: null, isAuthenticated: false, tokenDuration: null}),
+    },
+  setTimeRemaining: (remaining) => set({tokenDuration: remaining}) ,
+  logout: () => set({token: null, isAuthenticated: false, tokenDuration: null, email: null, password: null}),
 
 }),{
   name: 'token',
@@ -48,3 +45,19 @@ const useAuthStore = create(
 );
   
 export default useAuthStore;
+
+export function getAuthToken() {
+    const token= useAuthStore( (state) => state.token);
+
+    if (!token) {
+        return null
+    }
+
+    const tokenDuration = getTokenDuration();
+
+    if(tokenDuration < 0) {
+        return 'EXPIRED'
+    }
+
+    return token;
+}

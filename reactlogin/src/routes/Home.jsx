@@ -5,7 +5,8 @@ export default function Home() {
 
     const tokenDuration = useAuthStore( (state) => state.tokenDuration);
     
-  const isAuthenticated = useAuthStore( (state) => state.isAuthenticated);
+    const isAuthenticated = useAuthStore( (state) => state.isAuthenticated);
+
     return (
     <>
         <div className=" rounded-xl p-10 bg-emerald-200 hover:shadow-xl/50 shadow-xl">

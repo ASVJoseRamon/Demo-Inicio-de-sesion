@@ -18,7 +18,6 @@ export default function AuthForm() {
 
   const form = useForm({
     defaultValues: { email: '', password: '' },
-    onValidate: () => {},
     onSubmit: async ({ value }) => {
       console.log(value);
       console.log("Usuario: "+value.email);
